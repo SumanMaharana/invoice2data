@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://imgr.search.brave.com/mP5RBq5US-HxcFX9B8I_kSswrzCB5FlHoZ6NLbl6XF4/fit/200/225/ce/1/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5K/ajVFbHRvcE10TGJy/Z3JldG1waTV3SGFI/YSZwaWQ9QXBp" type="image/gif" sizes="16x16">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Invoice Extract</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mt-5 mx-auto">
+          <div class="card text-dark border-dark bg-light border-5 shadow rounded-2 mt-5">
+            <div class="card-body p-4 p-sm-5">
+              <h5 class="card-title text-center fw-bolder fs-2"><i class="fas fa-file-invoice"></i> Invoice2Data</h5>
+              <div class="card-title text-center mb-4 fw-light fs-5">Admin Login</div>
+              {% for msg in get_flashed_messages() %}
+                <div class="alert alert-danger alert-dismissible fade show text-center fs-6" role="alert">
+                  <i class="fas fa-skull-crossbones"></i> {{msg}}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endfor %}
+              <hr />
+              <form action="/Login" method="POST">
+                <div class="row mb-3">
+                  <div class="input-group input-group-lg">
+                    <div class="input-group-text"><i class="fas fa-at"></i></div>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" required >
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="input-group input-group-lg">
+                    <div class="input-group-text"><i class="fas fa-key"></i></div>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="input-group input-group-lg justify-content-md-center">
+                    <button type="submit" class="btn btn-dark">Login <i class="fas fa-lock-open"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

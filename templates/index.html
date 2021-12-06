@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://imgr.search.brave.com/mP5RBq5US-HxcFX9B8I_kSswrzCB5FlHoZ6NLbl6XF4/fit/200/225/ce/1/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5K/ajVFbHRvcE10TGJy/Z3JldG1waTV3SGFI/YSZwaWQ9QXBp" type="image/gif" sizes="16x16">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Invoice Extract</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark mb-5">
+        <div class="container-fluid">
+          <a class="navbar-brand" href=""><h1><i class="fas fa-file-invoice"></i> Invoice2Data</h1></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end bg-light" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header bg-light">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel"> Invoice2Data</h5>
+              <button type="button" class="btn-close text-reset" style="color: aliceblue;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body bg-dark">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href=""><h3><i class="fas fa-home"></i> Home</h3></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Logout"><h4><i class="fas fa-sign-out-alt"></i> Logout</h4></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div class="container justify-content-md-center mt-lg-5">
+        <form action="/Ext" method="POST" enctype="multipart/form-data">
+        <div>
+            <input class="form-control form-control-lg" type="file" name="invoicefile" id="invoicefile" required>
+        </div>
+        <div class="d-md-flex justify-content-md-center">
+            <button class="btn btn-dark btn-lg mt-4" type="submit">Get Invoice Details <i class="fas fa-chevron-circle-right"></i></button>
+          </div>
+        </form>
+    </div>
+    <div class="container justify-content-md-center mt-5 mb-5" {% if data %} style="display:block" {% else %} style="display:none" {% endif %}>
+        <div class="card border-success">
+            <h5 class="card-header border-dark"><i class="fas fa-info-circle"></i>  Fetched Invoice Details</h5>
+            <div class="card-body">
+        <form action="/Ins" method="post">
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Invoice Number</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="invno" id="invno" value="{{ data['Invoice Number'] }}">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Supplier Invoice Number</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="sinvno" id="sinvno" value="{{ data['Supplier Invoice Number'] }}">
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Supplier Name</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="supname" id="supname" value="{{ data['Supplier Name'] }}">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Owner Name</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="ownname" id="ownname" value="{{ data['Owner Name'] }}">
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Quantity</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="Quantity" id="Quantity" value="{{ data['Quantity'] }}">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Unit Price</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="Unitprice" id="Unitprice" value="{{ data['Unit Price'] }}">
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Item Number</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemnum" id="itemnum" value="{{ data['Item Number'] }}">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Item Description</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itendesc" id="itendesc" value="{{ data['Item Description'] }}">
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Invoice Date</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="invdate" id="invdate" value="{{ data['Invoice Date'] }}">
+                  </div>
+            </div>
+            <div class="col">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Invoice Amount</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="amount" id="amount" value="{{ data['Invoice Amount'] }}">
+                  </div>
+            </div>
+        </div>
+        <div class="d-md-flex justify-content-md-center">
+            <button class="btn btn-success mt-4" type="submit">Insert to Database <i class="fas fa-database"></i></button>
+          </div>
+        </form>
+        </div>
+        </div>
+    </div>
+    <div class="container justify-content-md-center mt-5 mb-5" {% if data %} style="display:none" {% else %} style="display:block" {% endif %}>
+      {% if allinv|length == 0  %}
+      <div class="alert alert-dark justify-content-md-center" role="alert">
+       <h5><i class="fas fa-folder-open"></i>  No Invoice Details in Database. Upload an Invoice and Insert to Database</h5>
+      </div>
+      {% else %}
+      {% for cat,msg in get_flashed_messages(with_categories=True) %}
+        {% if cat=="Delete1" %}
+          <div class="alert alert-danger alert-dismissible fade show text-center fs-4" role="alert">
+            <i class="far fa-trash-alt"></i> {{msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+        {% if cat=="Update1" %}
+          <div class="alert alert-success alert-dismissible fade show text-center fs-4" role="alert">
+            <i class="fas fa-spell-check"></i> {{msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+        {% if cat=="ins1" %}
+          <div class="alert alert-success alert-dismissible fade show text-center fs-4" role="alert">
+            <i class="far fa-check-circle"></i> {{msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+        {% if cat=="Update0" %}
+          <div class="alert alert-success alert-dismissible fade show text-center fs-4" role="alert">
+            <i class="fas fa-spider"></i> {{msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+        {% if cat=="upd1" %}
+          <div class="alert alert-warning alert-dismissible fade show text-center fs-4" role="alert">
+            <i class="far fa-times-circle"></i> {{msg}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+      {% endfor %}
+        <div class="card border-dark">
+            <h5 class="card-header border-dark"><i class="fas fa-database"></i> All Invoice Data</h5>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Invoice No.</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">more</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for inv in allinv %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>{{inv.invno}}</td>
+                            <td>{{inv.amount}}.00</td>
+                            <td>
+                                <a data-bs-toggle="offcanvas" href="#hg{{inv.invno}}" role="button" aria-controls="hg{{inv.invno}}"><span class="badge rounded-pill bg-dark">See All Info</span></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% for inv in allinv %}
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="hg{{inv.invno}}" aria-labelledby="offcanvasBottomLabel">
+        <form action="/Update" method="post">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasBottomLabel">
+            <a href="/Delete/{{ inv.invno }}" class="btn btn-outline-danger" >Delete <i class="fas fa-ban"></i></a>
+            <button class="btn btn-outline-warning" type="submit">Update <i class="fas fa-wrench"></i></button>
+        </h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Invoice Number</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="invno" id="invno" value="{{ inv.invno }}" readonly>
+                          </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Supplier Invoice Number</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="sinvno" id="sinvno" value="{{ inv.sinvno }}">
+                          </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Quantity</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="Quantity" id="Quantity" value="{{ inv.Quantity }}">
+                          </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Unit Price</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="Unitprice" id="Unitprice" value="{{ inv.Unitprice }}">
+                          </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Supplier Name</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="supname" id="supname" value="{{ inv.supname }}">
+                          </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Owner Name</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="ownname" id="ownname" value="{{ inv.ownname }}">
+                          </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Item Description</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itendesc" id="itendesc" value="{{ inv.itendesc }}">
+                          </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Item Number</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="itemnum" id="itemnum" value="{{ inv.itemnum }}">
+                          </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Invoice Date</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="invdate" id="invdate" value="{{ inv.invdate }}">
+                          </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Invoice Amount</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="amount" id="amount" value="{{ inv.amount }}">
+                          </div>
+                    </div>
+                </div>
+                <div class="d-md-flex justify-content-md-center">
+                </form>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
